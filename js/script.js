@@ -8,7 +8,7 @@
 // 4. Voto
 
 $(document).ready(function() {
-    $('header .tasto-cerca').click(function() {
+    $('header #tasto-cerca').click(function() {
         ricerca();
     });
     $('header #ricerca').keydown(function(event) {
@@ -26,35 +26,48 @@ $(document).ready(function() {
     function ricerca() {
         // salvo il contenuto della casella in una variabile
         var testoRicerca = $('header #ricerca').val()
-        // effettuo la chiamata ajax con la query della variabile ricavata
-        $.ajax(
-            {
-                url: 'https://api.themoviedb.org/3/search/movie',
-                method: 'GET',
-                data: {
-                    api_key: '1328a497ac2df77fd8be609391d51e42',
-                    language: 'it-IT',
-                    query: testoRicerca,
-                },
-                success: function(risposta) {
-                    $('.container').empty();
-                    var source = $("#entry-template").html();
-                    var template = Handlebars.compile(source);
-                    for (var i = 0; i < risposta.results.length; i++) {
-                        var context = {
-                            titolo: risposta.results[i].title,
-                            titoloOriginale: risposta.results[i].original_title,
-                            lingua: risposta.results[i].original_language,
-                            voto: risposta.results[i].vote_average,
-                        };
-                        var html = template(context);
-                        $('.container').append(html);
+        if (testoRicerca == "") {
+            $('.container').empty();
+            $('.container').html('nessun risultato');
+        } else {
+            // effettuo la chiamata ajax con la query della variabile ricavata
+            $.ajax(
+                {
+                    url: 'https://api.themoviedb.org/3/search/movie',
+                    method: 'GET',
+                    data: {
+                        api_key: '1328a497ac2df77fd8be609391d51e42',
+                        language: 'it-IT',
+                        query: testoRicerca,
+                    },
+                    success: function(risposta) {
+                        $('.container').empty();
+                        var source = $("#entry-template").html();
+                        var template = Handlebars.compile(source);
+                        console.log(risposta.results.length);
+                        if (risposta.results.length == 0) {
+                            $('.container').text('non ci sono risultati');
+                        } else {
+                            for (var i = 0; i < risposta.results.length; i++) {
+                                var context = {
+                                    titolo: risposta.results[i].title,
+                                    titoloOriginale: risposta.results[i].original_title,
+                                    lingua: risposta.results[i].original_language,
+                                    voto: risposta.results[i].vote_average,
+                                };
+                                var html = template(context);
+                                $('.container').append(html);
+
+
+                        }
+                        }
+                    },
+                    error: function() {
+                        alert('errore');
                     }
-                },
-                error: function() {
-                    alert('errore');
                 }
-            }
-        );
+            );
+
+        }
     };
 });
