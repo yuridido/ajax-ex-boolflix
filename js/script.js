@@ -8,8 +8,13 @@
 // 4. Voto
 
 $(document).ready(function() {
-    $('header .tasto').click(function() {
+    $('header .tasto-cerca').click(function() {
         ricerca();
+    });
+    $('header #ricerca').keydown(function(event) {
+        if (event.which == 13) {
+            ricerca();
+        }
     });
 
 
@@ -19,7 +24,9 @@ $(document).ready(function() {
 
     // FUNZIONI
     function ricerca() {
-        var testoRicerca = $('header input').val()
+        // salvo il contenuto della casella in una variabile
+        var testoRicerca = $('header #ricerca').val()
+        // effettuo la chiamata ajax con la query della variabile ricavata
         $.ajax(
             {
                 url: 'https://api.themoviedb.org/3/search/movie',
