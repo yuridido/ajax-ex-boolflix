@@ -58,9 +58,7 @@ $(document).ready(function() {
                                 };
                                 var html = template(context);
                                 $('.container').append(html);
-
-
-                        }
+                            }
                         }
                     },
                     error: function() {
