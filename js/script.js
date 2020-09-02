@@ -45,6 +45,7 @@ $(document).ready(function() {
                         var source = $("#entry-template").html();
                         var template = Handlebars.compile(source);
                         console.log(risposta.results.length);
+                        // controllo con un if se ho risultati utili altrimenti restituisco mess
                         if (risposta.results.length == 0) {
                             $('.container').text('non ci sono risultati');
                         } else {
