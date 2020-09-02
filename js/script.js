@@ -41,7 +41,9 @@ $(document).ready(function() {
                         query: testoRicerca,
                     },
                     success: function(risposta) {
+                        // svuoto la lista
                         $('.container').empty();
+
                         var source = $("#entry-template").html();
                         var template = Handlebars.compile(source);
                         console.log(risposta.results.length);
@@ -50,16 +52,24 @@ $(document).ready(function() {
                             $('.container').text('non ci sono risultati');
                         } else {
                             for (var i = 0; i < risposta.results.length; i++) {
+                                if (risposta.results[i].poster_path == null) {
+                                    var immagine = "https://images.pexels.com/photos/2262403/pexels-photo-2262403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                                } else {
+                                    var immagine = "https://image.tmdb.org/t/p/w500/" + risposta.results[i].poster_path;
+                                };
                                 var context = {
                                     titolo: risposta.results[i].title,
                                     titoloOriginale: risposta.results[i].original_title,
                                     lingua: risposta.results[i].original_language,
                                     voto: risposta.results[i].vote_average,
-                                };
+                                    img: immagine,
+                                }
                                 var html = template(context);
                                 $('.container').append(html);
                             }
                         }
+
+                        $('header #ricerca').val("");
                     },
                     error: function() {
                         alert('errore');
