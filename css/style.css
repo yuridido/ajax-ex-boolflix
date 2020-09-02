@@ -5,16 +5,53 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: black;
+}
 
 
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 80px;
+    line-height: 80px;
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    border-bottom: 5px solid #e50914;
+}
 
+.logo {
+    margin-left: 20px;
+}
+
+.search {
+    margin-right: 20px;
+}
+
+h1 {
+    font-size: 50px;
+    color: #e50914;
+}
+
+.container {
+    padding: 20px;
+    margin: 80px auto 0;
+
+
+}
+
+.contenitore-scheda {
+    padding: 15px;
+    float: left;
+
+}
 
 .scheda {
     height: 300px;
     width: 200px;
-    /* background-color: lightgray; */
-}
-
-{
-    ;
+    border-radius: 5px;
+    background-position: center;
+    background-size: cover;
 }
