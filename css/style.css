@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: SlateGrey;
 }
 
 
@@ -18,8 +18,18 @@ header {
     line-height: 80px;
     display: flex;
     justify-content: space-between;
-    background-color: black;
-    border-bottom: 5px solid #e50914;
+    background-color: #e50914;
+    /* border-bottom: 5px solid #e50914; */
+    border-bottom: 5px solid white;
+}
+
+
+/* HEADER */
+h1 {
+    font-size: 50px;
+    /* color: #e50914; */
+    color: white;
+    text-shadow: 3px 3px black;
 }
 
 .logo {
@@ -30,11 +40,31 @@ header {
     margin-right: 20px;
 }
 
-h1 {
-    font-size: 50px;
-    color: #e50914;
+#ricerca {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    padding: 0 10px;
+    border: none;
+    box-shadow: 3px 3px black;
 }
 
+#ricerca:focus {
+    border: 2px solid black;
+}
+
+#tasto-cerca {
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 3px 3px black;
+}
+
+
+
+/* MAIN */
 .container {
     padding: 20px;
     margin: 80px auto 0;
@@ -52,6 +82,7 @@ h1 {
     height: 300px;
     width: 200px;
     border-radius: 5px;
+    list-style: none;
     background-position: center;
     background-size: cover;
 }
