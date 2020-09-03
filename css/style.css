@@ -9,7 +9,6 @@ body {
     background-color: SlateGrey;
 }
 
-
 header {
     width: 100%;
     position: fixed;
@@ -66,6 +65,11 @@ h1 {
 
 
 /* MAIN */
+main {
+    width: 100vw;
+    height: calc(100vh - 80px);
+}
+
 .container {
     padding: 20px;
     margin: 80px auto 0;
@@ -88,13 +92,22 @@ h1 {
     background-size: cover;
     border: 1px solid black;
     box-shadow: 3px 3px 5px black;
+    color: orange;
 }
 
+.no-risultato {
+    /* display: none; */
+}
+
+
 .no-risultato span {
-    display: none;
+    width: 100vw;
     font-size: 100px;
     text-align: center;
-    line-height: 800px;
+    position: absolute;
+    top: 50%;
+    transform: translatey(-50%);
+
 }
 
 .bandiera {
@@ -102,6 +115,6 @@ h1 {
     height: 10%;
 }
 
-.active {
+/* .active {
     display: block;
-}
+} */
