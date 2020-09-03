@@ -15,12 +15,15 @@
                 <h1>BOOLFLIX</h1>
             </div>
             <div class="search">
-                <input id="ricerca" type="search">
+                <input id="ricerca" type="search" placeholder="ricerca">
                 <button id="tasto-cerca"><i class="fas fa-search"></i></button>
             </div>
         </header>
         <main>
             <div class="container">
+                <div class="no-risultato">
+                    <span>nessun risultato</span>
+                </div>
 
             </div>
 
@@ -33,7 +36,7 @@
                     <li>titolo: {{titolo}}</li>
                     <li>titolo originale: {{titoloOriginale}}</li>
                     <li>lingua: {{lingua}}</li>
-                    <li>voto: {{voto}}</li>
+                    <li>voto: {{{voto}}}</li>
                 </ul>
             </div>
         </script>

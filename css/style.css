@@ -57,6 +57,7 @@ h1 {
     margin-left: 10px;
     width: 40px;
     height: 40px;
+    font-size: 18px;
     border-radius: 50%;
     border: none;
     box-shadow: 3px 3px black;
@@ -85,4 +86,17 @@ h1 {
     list-style: none;
     background-position: center;
     background-size: cover;
+    border: 1px solid black;
+    box-shadow: 3px 3px 5px black;
+}
+
+.no-risultato span {
+    display: none;
+    font-size: 100px;
+    text-align: center;
+    line-height: 800px;
+}
+
+.active {
+    display: block;
 }

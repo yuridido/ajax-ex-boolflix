@@ -9,11 +9,11 @@
 
 $(document).ready(function() {
     $('header #tasto-cerca').click(function() {
-        ricerca();
+        ricercaFilm();
     });
     $('header #ricerca').keydown(function(event) {
         if (event.which == 13) {
-            ricerca();
+            ricercaFilm();
         }
     });
 
@@ -23,9 +23,10 @@ $(document).ready(function() {
 
 
     // FUNZIONI
-    function ricerca() {
+    function ricercaFilm() {
         // salvo il contenuto della casella in una variabile
         var testoRicerca = $('header #ricerca').val()
+        // controllo il caso di stringa vuota
         if (testoRicerca == "") {
             $('.container').empty();
             $('.container').html('nessun risultato');
@@ -41,32 +42,13 @@ $(document).ready(function() {
                         query: testoRicerca,
                     },
                     success: function(risposta) {
-                        // svuoto la lista
                         $('.container').empty();
-
-                        var source = $("#entry-template").html();
-                        var template = Handlebars.compile(source);
                         console.log(risposta.results.length);
                         // controllo con un if se ho risultati utili altrimenti restituisco mess
                         if (risposta.results.length == 0) {
                             $('.container').text('non ci sono risultati');
                         } else {
-                            for (var i = 0; i < risposta.results.length; i++) {
-                                if (risposta.results[i].poster_path == null) {
-                                    var immagine = "https://images.pexels.com/photos/2262403/pexels-photo-2262403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                                } else {
-                                    var immagine = "https://image.tmdb.org/t/p/w500/" + risposta.results[i].poster_path;
-                                };
-                                var context = {
-                                    titolo: risposta.results[i].title,
-                                    titoloOriginale: risposta.results[i].original_title,
-                                    lingua: risposta.results[i].original_language,
-                                    voto: risposta.results[i].vote_average,
-                                    img: immagine,
-                                }
-                                var html = template(context);
-                                $('.container').append(html);
-                            }
+                            insertFilm(risposta);
                         }
 
                         $('header #ricerca').val("");
@@ -79,4 +61,47 @@ $(document).ready(function() {
 
         }
     };
+
+    function insertFilm(data) {
+        for (var i = 0; i < data.results.length; i++) {
+            if (data.results[i].poster_path == null) {
+                var immagine = "https://images.pexels.com/photos/2262403/pexels-photo-2262403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            } else {
+                var immagine = "https://image.tmdb.org/t/p/w500/" + data.results[i].poster_path;
+            };
+            // creo l'oggetto con i dati della chiamata da inserire nel template
+            var context = {
+                titolo: data.results[i].title,
+                titoloOriginale: data.results[i].original_title,
+                lingua: data.results[i].original_language,
+                voto: stars(data.results[i].vote_average),
+                img: immagine,
+            }
+
+            var source = $("#entry-template").html();
+            var template = Handlebars.compile(source);
+            var html = template(context);
+            $('.container').append(html);
+        }
+    }
+
+    function reset() {
+        $('.container').empty();
+        $('header #ricerca').val("");
+    }
+
+    function stars(data) {
+        var stelle = "";
+        var voto = Math.ceil(data / 2);
+        for (var i = 0; i < 5; i++) {
+            if (i < voto) {
+                stelle += '<i class="fas fa-star"></i>';
+            } else {
+                stelle += '<i class="far fa-star"></i>';
+            }
+        }
+        return stelle;
+    }
+
+
 });
