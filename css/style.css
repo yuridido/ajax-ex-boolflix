@@ -26,7 +26,6 @@ header {
 /* HEADER */
 h1 {
     font-size: 50px;
-    /* color: #e50914; */
     color: white;
     text-shadow: 3px 3px black;
 }
@@ -90,9 +89,10 @@ main {
     list-style: none;
     background-position: center;
     background-size: cover;
+    bg
     border: 1px solid black;
     box-shadow: 3px 3px 5px black;
-    color: orange;
+    color: #e50914;
 }
 
 .no-risultato {
