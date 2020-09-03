@@ -105,9 +105,9 @@ $(document).ready(function() {
 
     function flag(data) {
         if (data == "en") {
-            return '<img src="img/en.png" alt="bandiera inglese">';
+            return '<img class="bandiera" src="img/en.png" alt="bandiera inglese">';
         } else if (data == "it") {
-            return '<img src="img/it.png" alt="bandiera inglese">';
+            return '<img class="bandiera" src="img/it.png" alt="bandiera inglese">';
         }   else {
             return data;
         }

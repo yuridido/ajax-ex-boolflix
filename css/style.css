@@ -97,6 +97,11 @@ h1 {
     line-height: 800px;
 }
 
+.bandiera {
+    width: 10%;
+    height: 10%;
+}
+
 .active {
     display: block;
 }
