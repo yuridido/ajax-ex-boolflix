@@ -59,7 +59,6 @@ $(document).ready(function() {
                         if (risposta.results.length != 0) {
                             insertFilm(risposta);
                         };
-
                     },
                     error: function() {
                         alert('errore');
@@ -103,7 +102,6 @@ $(document).ready(function() {
                 var immagine = "https://image.tmdb.org/t/p/w500/" + data.results[i].poster_path;
             };
             // creo l'oggetto con i dati della chiamata da inserire nel template
-
             var context = {
                 titolo: data.results[i].title,
                 titoloOriginale: data.results[i].original_title,
@@ -111,7 +109,6 @@ $(document).ready(function() {
                 voto: stars(data.results[i].vote_average),
                 img: immagine,
             }
-
             var source = $("#entry-template").html();
             var template = Handlebars.compile(source);
             var html = template(context);
@@ -127,7 +124,6 @@ $(document).ready(function() {
                 var immagine = "https://image.tmdb.org/t/p/w500/" + data.results[i].poster_path;
             };
             // creo l'oggetto con i dati della chiamata da inserire nel template
-
             var context = {
                 titolo: data.results[i].name,
                 titoloOriginale: data.results[i].original_name,
@@ -135,13 +131,13 @@ $(document).ready(function() {
                 voto: stars(data.results[i].vote_average),
                 img: immagine,
             }
-
             var source = $("#entry-template").html();
             var template = Handlebars.compile(source);
             var html = template(context);
             $('.container').append(html);
         }
     }
+
 
     function noResult() {
         return $('.container').append('<div class="no-risultato"><span>nessun risultato</span></div>');
@@ -168,7 +164,6 @@ $(document).ready(function() {
         }   else {
             return data;
         }
-
     }
 
 
