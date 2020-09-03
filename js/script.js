@@ -73,7 +73,7 @@ $(document).ready(function() {
             var context = {
                 titolo: data.results[i].title,
                 titoloOriginale: data.results[i].original_title,
-                lingua: data.results[i].original_language,
+                lingua: flag(data.results[i].original_language),
                 voto: stars(data.results[i].vote_average),
                 img: immagine,
             }
@@ -101,6 +101,17 @@ $(document).ready(function() {
             }
         }
         return stelle;
+    }
+
+    function flag(data) {
+        if (data == "en") {
+            return '<img src="img/en.png" alt="bandiera inglese">';
+        } else if (data == "it") {
+            return '<img src="img/it.png" alt="bandiera inglese">';
+        }   else {
+            return data;
+        }
+
     }
 
 
