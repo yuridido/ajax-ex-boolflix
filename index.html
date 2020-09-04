@@ -21,20 +21,24 @@
         </header>
         <main>
             <div class="container">
-                
+
             </div>
 
         </main>
 
-
         <script id="entry-template" type="text/x-handlebars-template">
             <div class="contenitore-scheda">
-                <ul class="scheda" style="background-image: url('{{img}}')">
-                    <li>titolo: {{titolo}}</li>
-                    <li>titolo originale: {{titoloOriginale}}</li>
-                    <li>lingua: {{{lingua}}}</li>
-                    <li>voto: {{{voto}}}</li>
-                </ul>
+                <div class="scheda">
+                    <img src="{{img}}" class="poster" alt="copertina">
+                    <ul>
+                        <li>titolo: {{titolo}}</li>
+                        <li>titolo originale: {{titoloOriginale}}</li>
+                        <li>lingua: {{{lingua}}}</li>
+                        <li>voto: {{{voto}}}</li>
+                        <li>tipo: {{{tipo}}}</li>
+                        <li>overview: {{{overview}}}</li>
+                    </ul>
+                </div>
             </div>
         </script>
 

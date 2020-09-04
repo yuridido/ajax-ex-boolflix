@@ -41,98 +41,136 @@ $(document).ready(function() {
             $('.container').empty();
             noResult();
         } else {
+
             // effettuo la chiamata ajax per i film
             $('.container').empty();
             $('header #ricerca').val("");
-            $.ajax(
-                {
-                    url: 'https://api.themoviedb.org/3/search/movie',
-                    method: 'GET',
-                    data: {
-                        api_key: '1328a497ac2df77fd8be609391d51e42',
-                        language: 'it-IT',
-                        query: testoRicerca,
-                    },
-                    success: function(risposta) {
-                        console.log(risposta.results.length);
-                        // controllo con un if se ho risultati utili altrimenti restituisco mess
-                        if (risposta.results.length != 0) {
-                            insertFilm(risposta);
-                        };
-                    },
-                    error: function() {
-                        alert('errore');
-                    }
-                }
-            );
-            // effettuo la chiamata ajax per le serie
-            $.ajax(
-                {
-                    url: 'https://api.themoviedb.org/3/search/tv',
-                    method: 'GET',
-                    data: {
-                        api_key: '1328a497ac2df77fd8be609391d51e42',
-                        language: 'it-IT',
-                        query: testoRicerca,
-                    },
-                    success: function(risposta) {
-                        console.log(risposta.results.length);
-                        // controllo con un if se ho risultati utili altrimenti restituisco mess
-                        if (risposta.results.length == 0) {
-                            noResult();
-                        } else {
-                            insertSerie(risposta);
-                        }
-
-                    },
-                    error: function() {
-                        alert('errore');
-                    }
-                }
-            );
+            var url1 = 'https://api.themoviedb.org/3/search/movie';
+            var url2 = 'https://api.themoviedb.org/3/search/tv';
+            chiamata(testoRicerca, url1, 'Film');
+            chiamata(testoRicerca, url2, 'Tv');
+            // $.ajax(
+            //     {
+            //         url: 'https://api.themoviedb.org/3/search/movie',
+            //         method: 'GET',
+            //         data: {
+            //             api_key: '1328a497ac2df77fd8be609391d51e42',
+            //             language: 'it-IT',
+            //             query: testoRicerca,
+            //         },
+            //         success: function(risposta) {
+            //             // controllo con un if se ho risultati utili altrimenti restituisco mess
+            //             if (risposta.results.length != 0) {
+            //                 insertResult(risposta, 'Film');
+            //             };
+            //         },
+            //         error: function() {
+            //             alert('errore');
+            //         }
+            //     }
+            // );
+            // // effettuo la chiamata ajax per le serie
+            // $.ajax(
+            //     {
+            //         url: 'https://api.themoviedb.org/3/search/tv',
+            //         method: 'GET',
+            //         data: {
+            //             api_key: '1328a497ac2df77fd8be609391d51e42',
+            //             language: 'it-IT',
+            //             query: testoRicerca,
+            //         },
+            //         success: function(risposta) {
+            //             console.log(risposta.results.length);
+            //             // controllo con un if se ho risultati utili altrimenti restituisco mess
+            //             if (risposta.results.length == 0) {
+            //                 noResult();
+            //             } else {
+            //                 insertResult(risposta, 'Tv');
+            //             }
+            //
+            //         },
+            //         error: function() {
+            //             alert('errore');
+            //         }
+            //     }
+            // );
 
         }
     };
 
-    function insertFilm(data) {
-        for (var i = 0; i < data.results.length; i++) {
-            if (data.results[i].poster_path == null) {
-                var immagine = "https://images.pexels.com/photos/2262403/pexels-photo-2262403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            } else {
-                var immagine = "https://image.tmdb.org/t/p/w500/" + data.results[i].poster_path;
-            };
-            // creo l'oggetto con i dati della chiamata da inserire nel template
-            var context = {
-                titolo: data.results[i].title,
-                titoloOriginale: data.results[i].original_title,
-                lingua: flag(data.results[i].original_language),
-                voto: stars(data.results[i].vote_average),
-                img: immagine,
+    // function insertFilm(data) {
+    //     var source = $("#entry-template").html();
+    //     var template = Handlebars.compile(source);
+    //     for (var i = 0; i < data.results.length; i++) {
+    //         if (data.results[i].poster_path == null) {
+    //             var immagine = "https://images.pexels.com/photos/2262403/pexels-photo-2262403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+    //         } else {
+    //             var immagine = "https://image.tmdb.org/t/p/w500/" + data.results[i].poster_path;
+    //         };
+    //         // creo l'oggetto con i dati della chiamata da inserire nel template
+    //         var context = {
+    //             titolo: data.results[i].title,
+    //             titoloOriginale: data.results[i].original_title,
+    //             lingua: flag(data.results[i].original_language),
+    //             voto: stars(data.results[i].vote_average),
+    //             img: immagine,
+    //             tipo: 'film'
+    //
+    //         }
+    //         var html = template(context);
+    //         $('.container').append(html);
+    //     }
+    // }
+
+    function chiamata(query, url, typo) {
+        $.ajax(
+            {
+                url: url,
+                method: 'GET',
+                data: {
+                    api_key: '1328a497ac2df77fd8be609391d51e42',
+                    language: 'it-IT',
+                    query: query,
+                },
+                success: function(risposta) {
+                    // controllo con un if se ho risultati utili altrimenti restituisco mess
+                    if (risposta.results.length != 0) {
+                        insertResult(risposta, typo);
+                    };
+                },
+                error: function() {
+                    alert('errore');
+                }
             }
-            var source = $("#entry-template").html();
-            var template = Handlebars.compile(source);
-            var html = template(context);
-            $('.container').append(html);
-        }
+        );
     }
 
-    function insertSerie(data) {
+    function insertResult(data, typo) {
+        var source = $("#entry-template").html();
+        var template = Handlebars.compile(source);
         for (var i = 0; i < data.results.length; i++) {
             if (data.results[i].poster_path == null) {
                 var immagine = "https://images.pexels.com/photos/2262403/pexels-photo-2262403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
             } else {
-                var immagine = "https://image.tmdb.org/t/p/w500/" + data.results[i].poster_path;
+                var immagine = "https://image.tmdb.org/t/p/w342/" + data.results[i].poster_path;
             };
             // creo l'oggetto con i dati della chiamata da inserire nel template
+            if (typo == 'Film') {
+                var titolo = data.results[i].title;
+                var titoloOriginale = data.results[i].original_title;
+            } else if (typo == 'Tv') {
+                var titolo = data.results[i].name;
+                var titoloOriginale = data.results[i].original_name;
+            };
             var context = {
-                titolo: data.results[i].name,
-                titoloOriginale: data.results[i].original_name,
+                titolo: titolo,
+                titoloOriginale: titoloOriginale,
                 lingua: flag(data.results[i].original_language),
                 voto: stars(data.results[i].vote_average),
                 img: immagine,
+                tipo: typo,
+                overview: (data.results[i].overview),
             }
-            var source = $("#entry-template").html();
-            var template = Handlebars.compile(source);
             var html = template(context);
             $('.container').append(html);
         }
@@ -156,14 +194,13 @@ $(document).ready(function() {
         return stelle;
     }
 
-    function flag(data) {
-        if (data == "en") {
-            return '<img class="bandiera" src="img/en.png" alt="bandiera inglese">';
-        } else if (data == "it") {
-            return '<img class="bandiera" src="img/it.png" alt="bandiera inglese">';
-        }   else {
-            return data;
-        }
+    function flag(lingua) {
+        var bandiere = ['en', 'it'];
+        if (bandiere.includes(lingua)) {
+            return '<img class="bandiera" src="img/'+lingua+'.png" alt="">';
+        } else {
+            return lingua;
+        };
     }
 
 
