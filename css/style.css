@@ -12,6 +12,7 @@ body {
 header {
     width: 100%;
     position: fixed;
+    z-index: 999;
     top: 0;
     height: 80px;
     line-height: 80px;
@@ -83,23 +84,49 @@ main {
 }
 
 .scheda {
-    height: 300px;
-    width: 200px;
+    position: relative;
+    height: 450px;
+    width: 300px;
     border-radius: 5px;
-    list-style: none;
     border: 1px solid black;
     box-shadow: 3px 3px 5px black;
-    color: #e50914;
+    background-color: #e50914;
+    color: white;
     overflow: hidden;
 }
 
 .poster {
-    display: none;
+    /* display: none; */
+
     width: 100%;
     height: 100%;
     object-fit: fill;
     object-position: center;
 }
+
+
+.contenitore-scheda:hover .poster {
+    opacity: 20%;
+    transition: 0.7s;
+}
+
+.dati-scheda {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 450px;
+    width: 300px;
+    list-style: none;
+}
+
+.contenitore-scheda:hover .dati-scheda {
+    opacity: 1;
+    z-index: 3;
+    transition: 0.7s;
+}
+
+
 
 .no-risultato {
     /* display: none; */

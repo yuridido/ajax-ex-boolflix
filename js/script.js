@@ -27,7 +27,7 @@ $(document).ready(function() {
         }
     });
 
-
+    
 
 
 
@@ -143,7 +143,7 @@ $(document).ready(function() {
                 }
             }
         );
-    }
+    };
 
     function insertResult(data, typo) {
         var source = $("#entry-template").html();
@@ -174,12 +174,12 @@ $(document).ready(function() {
             var html = template(context);
             $('.container').append(html);
         }
-    }
+    };
 
 
     function noResult() {
         return $('.container').append('<div class="no-risultato"><span>nessun risultato</span></div>');
-    }
+    };
 
     function stars(data) {
         var stelle = "";
@@ -192,7 +192,7 @@ $(document).ready(function() {
             }
         }
         return stelle;
-    }
+    };
 
     function flag(lingua) {
         var bandiere = ['en', 'it'];
@@ -201,7 +201,8 @@ $(document).ready(function() {
         } else {
             return lingua;
         };
-    }
+    };
+
 
 
 });
