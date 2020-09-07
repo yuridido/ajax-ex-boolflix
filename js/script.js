@@ -21,8 +21,9 @@ $(document).ready(function() {
         var testoRicerca = $('header #ricerca').val()
         // controllo il caso di stringa vuota
         if (testoRicerca == "") {
-            $('.container').empty();
-            noResult();
+            svuota()
+            noResult('Film');
+            noResult('Tv');
         } else {
 
             // effettuo la chiamata ajax per i film
@@ -31,6 +32,7 @@ $(document).ready(function() {
             var url2 = 'https://api.themoviedb.org/3/search/tv';
             chiamata(testoRicerca, url1, 'Film');
             chiamata(testoRicerca, url2, 'Tv');
+
 
         }
     };
@@ -49,7 +51,9 @@ $(document).ready(function() {
                     // controllo con un if se ho risultati utili altrimenti restituisco mess
                     if (risposta.results.length != 0) {
                         insertResult(risposta, typo);
-                    };
+                    } else {
+                        noResult(typo);
+                    }
                 },
                 error: function() {
                     alert('errore');
@@ -71,10 +75,16 @@ $(document).ready(function() {
             if (typo == 'Film') {
                 var titolo = data.results[i].title;
                 var titoloOriginale = data.results[i].original_title;
+                var tipo = 'movie';
             } else if (typo == 'Tv') {
                 var titolo = data.results[i].name;
                 var titoloOriginale = data.results[i].original_name;
+                var tipo = 'tv';
             };
+
+            var id = data.results[i].id;
+
+
             var context = {
                 titolo: titolo,
                 titoloOriginale: titoloOriginale,
@@ -83,11 +93,48 @@ $(document).ready(function() {
                 img: immagine,
                 tipo: typo,
                 overview: (data.results[i].overview).substring(0, 250) + "[...]",
+                id: id
             }
+
             var html = template(context);
-            $('.container').append(html);
+            $('.container-'+ typo).append(html);
+            console.log(id);
+            console.log(tipo);
+            cercaDettagli(id, tipo);
         }
     };
+
+
+    function cercaDettagli(id, tipo) {
+        var url = 'https://api.themoviedb.org/3/'+ tipo + '/' + id;
+        $.ajax(
+            {
+                url: url,
+                method: 'GET',
+                data: {
+                    api_key: '1328a497ac2df77fd8be609391d51e42',
+                    language: 'it-IT',
+                    append_to_response: 'credits',
+                },
+                success: function(risposta) {
+                    var generi = risposta.genres;
+                    var attori = risposta.credits.cast;
+                    stampaDettagli()
+                },
+                error: function() {
+                    alert('errore');
+                }
+            }
+        );
+
+    };
+
+    function stampaDettagli(id, generi, attori) {
+        // stampo gli Attori
+        var listaAttori = "";
+        
+    }
+
 
 
     function noResult(typo) {
@@ -117,10 +164,12 @@ $(document).ready(function() {
     };
 
     function svuota() {
-        $('.container-film').empty();
-        $('.container-serie').empty();
+        $('.container-Film').empty();
+        $('.container-Tv').empty();
         $('header #ricerca').val("");
     };
+
+
 
 
 

@@ -23,11 +23,11 @@
         </header>
         <main>
             <h2>Film</h2>
-            <div class="container-film clearfix">
+            <div class="container-Film clearfix">
 
             </div>
             <h2>Serie Tv</h2>
-            <div class="container-serie clearfix">
+            <div class="container-Tv clearfix">
 
             </div>
 
@@ -36,17 +36,22 @@
         <script id="entry-template" type="text/x-handlebars-template">
             <div class="contenitore-scheda">
                 <div class="scheda">
-                    <img src="{{img}}" class="poster" alt={{titolo}}>
-                    <ul class="dati-scheda">
+                    <img src="{{img}}" class="poster" alt="{{titolo}}">
+                    <ul class="dati-scheda" data-id="{{id}}">
                         <li><h3>Titolo: {{titolo}}</h3></li>
                         <li><strong>Titolo originale:</strong> {{titoloOriginale}}</li>
                         <li><strong>Lingua:</strong> {{{lingua}}}</li>
                         <li><strong>Voto:</strong> {{{voto}}}</li>
                         <li><strong>Tipo:</strong> {{{tipo}}}</li>
                         <li><strong>Overview: {{{overview}}}</li>
+
                     </ul>
                 </div>
             </div>
+        </script>
+        <script id="dettagli-template" type="text/x-handlebars-template">
+            <li><strong>Attori:{{attori}}</li>
+            <li><strong>Generi:{{generi}}</li>
         </script>
 
 
