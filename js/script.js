@@ -119,7 +119,7 @@ $(document).ready(function() {
                 success: function(risposta) {
                     var generi = risposta.genres;
                     var attori = risposta.credits.cast;
-                    stampaDettagli()
+                    stampaDettagli(id, generi, attori)
                 },
                 error: function() {
                     alert('errore');
@@ -132,7 +132,29 @@ $(document).ready(function() {
     function stampaDettagli(id, generi, attori) {
         // stampo gli Attori
         var listaAttori = "";
-        
+        for (i = 0; i < attori.length & i < 5; i++) {
+            listaAttori += attori[i].name;
+            if (i < 4) {
+                listaAttori += ", "
+            }
+        }
+        // stampo i Generi
+        var listaGeneri = "";
+        for (i = 0; i < generi.length; i++) {
+            listaGeneri += generi[i].name;
+            if (i < generi.length - 1) {
+                listaGeneri += ", ";
+            }
+        }
+        // appendo
+        var source = $("#dettagli-template").html();
+        var template = Handlebars.compile(source);
+        var context = {
+            attori: listaAttori,
+            generi: listaGeneri,
+        }
+        var html = template(context);
+        $('[data-id='+ id +']').append(html);
     }
 
 
