@@ -5,8 +5,16 @@
     box-sizing: border-box;
 }
 
+.clearfix {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 body {
     background-color: SlateGrey;
+    /* background-color: black; */
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 header {
@@ -25,14 +33,28 @@ header {
 
 
 /* HEADER */
-h1 {
+/* h1 {
     font-size: 50px;
     color: white;
     text-shadow: 3px 3px black;
+} */
+
+h2 {
+    font-size: 40px;
+    color: white;
+    text-shadow: 3px 3px black;
+    width: 100%;
+    margin-left: 20px;
 }
 
 .logo {
-    margin-left: 20px;
+    margin: 10px 20px;
+
+}
+
+.logo img {
+    height: 50px;
+
 }
 
 .search {
@@ -66,13 +88,15 @@ h1 {
 
 /* MAIN */
 main {
+    margin-top: 80px;
     width: 100vw;
-    height: calc(100vh - 80px);
+    /* height: calc(100vh - 80px); */
 }
 
 .container {
+    width: 100vw;
     padding: 20px;
-    margin: 80px auto 0;
+    margin: 20px auto 0;
 
 
 }
@@ -90,9 +114,14 @@ main {
     border-radius: 5px;
     border: 1px solid black;
     box-shadow: 3px 3px 5px black;
-    background-color: #e50914;
+    background-color: black;
     color: white;
     overflow: hidden;
+    transition: 0.5s;
+}
+
+.scheda:hover {
+    transform: scale(1.05);
 }
 
 .poster {
@@ -102,12 +131,12 @@ main {
     height: 100%;
     object-fit: fill;
     object-position: center;
+    transition: 1.5s;
 }
 
 
 .contenitore-scheda:hover .poster {
     opacity: 20%;
-    transition: 0.7s;
 }
 
 .dati-scheda {
@@ -118,12 +147,17 @@ main {
     height: 450px;
     width: 300px;
     list-style: none;
+    padding: 20px;
+    transition: 1.5s;
 }
 
 .contenitore-scheda:hover .dati-scheda {
     opacity: 1;
     z-index: 3;
-    transition: 0.7s;
+}
+
+.dati-scheda li {
+    margin-bottom: 10px;
 }
 
 

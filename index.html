@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
@@ -12,7 +13,8 @@
 
         <header>
             <div class="logo">
-                <h1>BOOLFLIX</h1>
+                <img src="img/logo.png" alt="logo">
+                <!-- <h1>BOOLFLIX</h1> -->
             </div>
             <div class="search">
                 <input id="ricerca" type="search" placeholder="ricerca">
@@ -20,7 +22,12 @@
             </div>
         </header>
         <main>
-            <div class="container">
+            <h2>Film</h2>
+            <div class="container-film clearfix">
+
+            </div>
+            <h2>Serie Tv</h2>
+            <div class="container-serie clearfix">
 
             </div>
 
@@ -29,14 +36,14 @@
         <script id="entry-template" type="text/x-handlebars-template">
             <div class="contenitore-scheda">
                 <div class="scheda">
-                    <img src="{{img}}" class="poster" alt="copertina">
+                    <img src="{{img}}" class="poster" alt={{titolo}}>
                     <ul class="dati-scheda">
-                        <li>titolo: {{titolo}}</li>
-                        <li>titolo originale: {{titoloOriginale}}</li>
-                        <li>lingua: {{{lingua}}}</li>
-                        <li>voto: {{{voto}}}</li>
-                        <li>tipo: {{{tipo}}}</li>
-                        <li>overview: {{{overview}}}</li>
+                        <li><h3>Titolo: {{titolo}}</h3></li>
+                        <li><strong>Titolo originale:</strong> {{titoloOriginale}}</li>
+                        <li><strong>Lingua:</strong> {{{lingua}}}</li>
+                        <li><strong>Voto:</strong> {{{voto}}}</li>
+                        <li><strong>Tipo:</strong> {{{tipo}}}</li>
+                        <li><strong>Overview: {{{overview}}}</li>
                     </ul>
                 </div>
             </div>
