@@ -15,8 +15,8 @@ $(document).ready(function() {
     });
 
     // FILTRO GENERI
-    $('#generi-movie').click(function() {
-        var genere = $(this).parents(select).val();
+    $('#generi-movie').change(function() {
+        var genere = $(this).val();
         $('.scheda .dati-scheda').each(function() {
             if ($(this).attr('data-genre') == genere) {
                 $(this).parents('.scheda').removeClass('inactive');
@@ -27,7 +27,6 @@ $(document).ready(function() {
             }
         });
     });
-
 
 
 
