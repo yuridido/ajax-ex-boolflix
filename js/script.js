@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // creazione Generi
-    generaGeneri('movie')
+    generaGeneri('movie');
+    generaGeneri('tv');
 
     // evento tasto ricerca
     $('header #tasto-cerca').click(function() {
@@ -11,6 +12,20 @@ $(document).ready(function() {
         if (event.which == 13 || event.keyCode == 13) {
             ricerca();
         }
+    });
+
+    // FILTRO GENERI
+    $('#generi-movie').click(function() {
+        var genere = $(this).parents(select).val();
+        $('.scheda .dati-scheda').each(function() {
+            if ($(this).attr('data-genre') == genere) {
+                $(this).parents('.scheda').removeClass('inactive');
+                $(this).parents('.scheda').addClass('active');
+            } else {
+                $(this).parents('.scheda').removeClass('active');
+                $(this).parents('.scheda').addClass('inactive');
+            }
+        });
     });
 
 
@@ -37,7 +52,7 @@ $(document).ready(function() {
                             name: data.genres[i].name,
                         }
                         var html = template(context);
-                        $('#generi').append(html);
+                        $('#generi-' + tipo).append(html);
                         }
                     },
                 error: function() {

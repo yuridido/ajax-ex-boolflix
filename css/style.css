@@ -183,6 +183,10 @@ main {
     height: 10%;
 }
 
-/* .active {
+.active {
     display: block;
-} */
+}
+
+.inactive {
+    display: none;
+}
