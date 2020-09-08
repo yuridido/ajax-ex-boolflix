@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    // creazione Generi
+    // generaGeneri()
+
     // evento tasto ricerca
     $('header #tasto-cerca').click(function() {
         ricerca();
@@ -16,6 +19,14 @@ $(document).ready(function() {
 
 
     // *****FUNZIONI*****
+    // function generaGeneri() {
+    //     $.ajax(
+    //         {
+    //             url:
+    //         }
+    //     );
+    // }
+
     function ricerca() {
         // salvo il contenuto della casella in una variabile
         var testoRicerca = $('header #ricerca').val()
@@ -83,6 +94,8 @@ $(document).ready(function() {
             };
 
             var id = data.results[i].id;
+            var idGeneri = "";
+            idGeneri += generId(data.results[i]);
 
 
             var context = {
@@ -93,13 +106,12 @@ $(document).ready(function() {
                 img: immagine,
                 tipo: typo,
                 overview: (data.results[i].overview).substring(0, 250) + "[...]",
-                id: id
+                id: id,
+                genre: idGeneri,
             }
 
             var html = template(context);
             $('.container-'+ typo).append(html);
-            console.log(id);
-            console.log(tipo);
             cercaDettagli(id, tipo);
         }
     };
@@ -155,6 +167,17 @@ $(document).ready(function() {
         }
         var html = template(context);
         $('[data-id='+ id +']').append(html);
+    }
+
+    function generId(data) {
+        var listaIdGen = "";
+        for (i = 0; i < data.genre_ids.length; i++) {
+            listaIdGen += data.genre_ids[i];
+            if (i < data.genre_ids.length - 1) {
+                listaIdGen += ", ";
+            }
+        }
+        return listaIdGen;
     }
 
 

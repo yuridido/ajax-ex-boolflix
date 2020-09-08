@@ -158,7 +158,9 @@ main {
     margin-bottom: 10px;
 }
 
-
+.dati-scheda .fa-star {
+    color: gold;
+}
 
 .no-risultato {
     /* display: none; */

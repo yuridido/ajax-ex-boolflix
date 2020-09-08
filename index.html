@@ -16,6 +16,9 @@
                 <img src="img/logo.png" alt="logo">
                 <!-- <h1>BOOLFLIX</h1> -->
             </div>
+            <select id="generi" class="generi" name="generi">
+
+            </select>
             <div class="search">
                 <input id="ricerca" type="search" placeholder="ricerca">
                 <button id="tasto-cerca"><i class="fas fa-search"></i></button>
@@ -37,7 +40,7 @@
             <div class="contenitore-scheda">
                 <div class="scheda">
                     <img src="{{img}}" class="poster" alt="{{titolo}}">
-                    <ul class="dati-scheda" data-id="{{id}}">
+                    <ul class="dati-scheda" data-id="{{id}}" data-genre="{{genre}}">
                         <li><h3>Titolo: {{titolo}}</h3></li>
                         <li><strong>Titolo originale:</strong> {{titoloOriginale}}</li>
                         <li><strong>Lingua:</strong> {{{lingua}}}</li>
