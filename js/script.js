@@ -18,12 +18,12 @@ $(document).ready(function() {
     $('#generi-movie').change(function() {
         var genere = $(this).val();
         $('.scheda .dati-scheda').each(function() {
-            if ($(this).attr('data-genre') == genere) {
-                $(this).parents('.scheda').removeClass('inactive');
-                $(this).parents('.scheda').addClass('active');
+            if ($(this).attr('data-genre').includes(genere)) {
+                $(this).parents('.contenitore-scheda').removeClass('inactive');
+                $(this).parents('.contenitore-scheda').addClass('active');
             } else {
-                $(this).parents('.scheda').removeClass('active');
-                $(this).parents('.scheda').addClass('inactive');
+                $(this).parents('.contenitore-scheda').removeClass('active');
+                $(this).parents('.contenitore-scheda').addClass('inactive');
             }
         });
     });

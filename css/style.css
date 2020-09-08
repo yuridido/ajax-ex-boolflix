@@ -184,9 +184,11 @@ main {
 }
 
 .active {
+    position: relative;
     display: block;
 }
 
 .inactive {
+    position: absolute;
     display: none;
 }
