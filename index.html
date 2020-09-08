@@ -36,6 +36,7 @@
 
         </main>
 
+        <!-- TEMPLATE SCHEDA FILM -->
         <script id="entry-template" type="text/x-handlebars-template">
             <div class="contenitore-scheda">
                 <div class="scheda">
@@ -52,10 +53,16 @@
                 </div>
             </div>
         </script>
+        <!-- TEMPLATE DETTAGLI -->
         <script id="dettagli-template" type="text/x-handlebars-template">
             <li><strong>Attori:{{attori}}</li>
             <li><strong>Generi:{{generi}}</li>
         </script>
+
+        <script id="generi-template" type="text/x-handlebars-template">
+            <option value="{{id}}">{{name}}</option>
+        </script>
+
 
 
         <script src="js/script.js" charset="utf-8"></script>

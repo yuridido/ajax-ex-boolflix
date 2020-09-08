@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // creazione Generi
-    // generaGeneri()
+    generaGeneri('movie')
 
     // evento tasto ricerca
     $('header #tasto-cerca').click(function() {
@@ -19,13 +19,34 @@ $(document).ready(function() {
 
 
     // *****FUNZIONI*****
-    // function generaGeneri() {
-    //     $.ajax(
-    //         {
-    //             url:
-    //         }
-    //     );
-    // }
+    function generaGeneri(tipo) {
+        $.ajax(
+            {
+                url: 'https://api.themoviedb.org/3/genre/' + tipo + '/list',
+                method: 'GET',
+                data: {
+                    api_key: '1328a497ac2df77fd8be609391d51e42',
+                    language: 'it-IT',
+                },
+                success: function(data) {
+                    var source = $("#generi-template").html();
+                    var template = Handlebars.compile(source);
+                    for (i = 0; i < data.genres.length; i++) {
+                        var context = {
+                            id: data.genres[i].id,
+                            name: data.genres[i].name,
+                        }
+                        var html = template(context);
+                        $('#generi').append(html);
+                        }
+                    },
+                error: function() {
+                    alert('errore')
+                }
+
+            }
+        );
+    }
 
     function ricerca() {
         // salvo il contenuto della casella in una variabile
