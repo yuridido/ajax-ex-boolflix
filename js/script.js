@@ -30,8 +30,6 @@ $(document).ready(function() {
 
 
 
-
-
     // *****FUNZIONI*****
     function generaGeneri(tipo) {
         $.ajax(
@@ -113,7 +111,7 @@ $(document).ready(function() {
         var template = Handlebars.compile(source);
         for (var i = 0; i < data.results.length; i++) {
             if (data.results[i].poster_path == null) {
-                var immagine = "https://images.pexels.com/photos/2262403/pexels-photo-2262403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                var immagine = "img/cover1.jpg"
             } else {
                 var immagine = "https://image.tmdb.org/t/p/w342/" + data.results[i].poster_path;
             };
