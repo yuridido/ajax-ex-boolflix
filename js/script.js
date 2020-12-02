@@ -1,15 +1,16 @@
 $(document).ready(function() {
     // creazione Generi
     generaGeneri('movie');
-    generaGeneri('tv');
 
     // evento tasto ricerca
     $('header #tasto-cerca').click(function() {
+        $('#welcome').hide();
         ricerca();
     });
     // evento invio nella casella input
     $('header #ricerca').keydown(function(event) {
         if (event.which == 13 || event.keyCode == 13) {
+            $('#welcome').hide();
             ricerca();
         }
     });
@@ -17,15 +18,22 @@ $(document).ready(function() {
     // FILTRO GENERI
     $('#generi-movie').change(function() {
         var genere = $(this).val();
-        $('.scheda .dati-scheda').each(function() {
-            if ($(this).attr('data-genre').includes(genere)) {
+        if(genere != 0) {
+            $('.scheda .dati-scheda').each(function() {
+                if ($(this).attr('data-genre').includes(genere)) {
+                    $(this).parents('.contenitore-scheda').removeClass('inactive');
+                    $(this).parents('.contenitore-scheda').addClass('active');
+                } else {
+                    $(this).parents('.contenitore-scheda').removeClass('active');
+                    $(this).parents('.contenitore-scheda').addClass('inactive');
+                }
+            });
+        } else  {
+            $('.scheda .dati-scheda').each(function() {
                 $(this).parents('.contenitore-scheda').removeClass('inactive');
                 $(this).parents('.contenitore-scheda').addClass('active');
-            } else {
-                $(this).parents('.contenitore-scheda').removeClass('active');
-                $(this).parents('.contenitore-scheda').addClass('inactive');
-            }
-        });
+            });
+        }
     });
 
 
@@ -49,7 +57,7 @@ $(document).ready(function() {
                             name: data.genres[i].name,
                         }
                         var html = template(context);
-                        $('#generi-' + tipo).append(html);
+                        $('#generi-movie').append(html);
                         }
                     },
                 error: function() {
@@ -65,7 +73,9 @@ $(document).ready(function() {
         var testoRicerca = $('header #ricerca').val()
         // controllo il caso di stringa vuota
         if (testoRicerca == "") {
-            svuota()
+            svuota();
+            $('#film').empty();
+            $('#serie').empty();
             noResult('Film');
             noResult('Tv');
         } else {
@@ -109,6 +119,17 @@ $(document).ready(function() {
     function insertResult(data, typo) {
         var source = $("#entry-template").html();
         var template = Handlebars.compile(source);
+
+        if (data.results.length > 0) {
+            console.log('ok');
+            if (typo == 'Film') {
+                $('#film').empty();
+                $('#film').append('<h2>Film</h2>');
+            } else if(typo == 'Tv') {
+                $('#serie').empty();
+                $('#serie').append('<h2>Serie Tv</h2>');
+            }
+        }
         for (var i = 0; i < data.results.length; i++) {
             if (data.results[i].poster_path == null) {
                 var immagine = "img/cover1.jpg"
@@ -138,7 +159,7 @@ $(document).ready(function() {
                 voto: stars(data.results[i].vote_average),
                 img: immagine,
                 tipo: typo,
-                overview: (data.results[i].overview).substring(0, 250) + "[...]",
+                overview: (data.results[i].overview).substring(0, 220) + "[...]",
                 id: id,
                 genre: idGeneri,
             }
@@ -216,9 +237,15 @@ $(document).ready(function() {
 
 
     function noResult(typo) {
-        return $('.container-'+typo).append('<div class="no-risultato"><span>nessun risultato</span></div>');
+        if(typo == 'movie') {
+            return $('.container-'+typo).append('<div class="no-risultato"><span>nessun film trovato</span></div>');
+        } else {
+            return $('.container-'+typo).append('<div class="no-risultato"><span>nessuna serie tv trovata</span></div>');
+
+        }
     };
 
+    // funzione che restituisce le icone stella
     function stars(data) {
         var stelle = "";
         var voto = Math.ceil(data / 2);
@@ -232,6 +259,7 @@ $(document).ready(function() {
         return stelle;
     };
 
+    // funzione per la bandierina
     function flag(lingua) {
         var bandiere = ['en', 'it'];
         if (bandiere.includes(lingua)) {
@@ -241,6 +269,7 @@ $(document).ready(function() {
         };
     };
 
+    // funzione per svuotare i container
     function svuota() {
         $('.container-Film').empty();
         $('.container-Tv').empty();
